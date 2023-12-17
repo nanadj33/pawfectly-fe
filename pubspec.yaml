@@ -38,11 +38,14 @@ dependencies:
   get: ^4.6.6
   dio: ^5.3.3
   device_info_plus: ^9.1.1
+<<<<<<< HEAD
   google_fonts: ^6.1.0
   intl: ^0.19.0
   image_picker: ^1.0.5
   path_provider: ^2.1.1
   url_launcher: ^6.2.2
+=======
+>>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
 
 dev_dependencies:
   flutter_test:

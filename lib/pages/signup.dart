@@ -16,6 +16,7 @@ class SignUpPage extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
+<<<<<<< HEAD
             SingleChildScrollView(
               child: Positioned(
                 child: Form(
@@ -106,6 +107,8 @@ class SignUpPage extends StatelessWidget {
               ),
             ),
 
+=======
+>>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
             Positioned(
               top: 0,
               left: 0,
@@ -120,6 +123,7 @@ class SignUpPage extends StatelessWidget {
               left: 0,
               right: 0,
               child: Column(
+<<<<<<< HEAD
                   children: [
                     Center(
                       child: Image(
@@ -159,6 +163,87 @@ class SignUpPage extends StatelessWidget {
                 ),
             ),
             
+=======
+                children: [
+                  Center(
+                    child: Image(
+                      image: AssetImage("assets/logo.png"),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 75.0, vertical: 25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignInPage(),
+                                fullscreenDialog: true,
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "SignIn",
+                            style: _textStyle(),
+                          ),
+                        ),
+                        Text(
+                          "SignUp",
+                          style: _textStyle(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 60),
+                  _buildTextField(
+                    controller: _registerController.emailController,
+                    hintText: "e-mail",
+                    prefixIcon: SvgPicture.asset("assets/username.svg"),
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  _buildTextField(
+                    controller: _registerController.nameController,
+                    hintText: "Full Name",
+                    prefixIcon: SvgPicture.asset("assets/username.svg"),
+                  ),
+                  _buildTextField(
+                    controller: _registerController.usernameController,
+                    hintText: "Username",
+                    prefixIcon: SvgPicture.asset("assets/username.svg"),
+                  ),
+                  _buildTextField(
+                    controller: _registerController.phoneController,
+                    hintText: "Phone Number",
+                    prefixIcon: Icon(Icons.phone),
+                    keyboardType: TextInputType.phone,
+                  ),
+                  _buildTextField(
+                    controller: _registerController.passwordController,
+                    hintText: "Password",
+                    prefixIcon: SvgPicture.asset("assets/password.svg"),
+                    obscureText: true,
+                  ),
+                  _buildTextField(
+                    controller: _registerController.conpasswordController,
+                    hintText: "Confirm Password",
+                    prefixIcon: SvgPicture.asset("assets/password.svg"),
+                    obscureText: true,
+                  ),
+                  SizedBox(height: 50),
+                  _buildElevatedButton(
+                    onPressed: () {
+                      _registerController.register(context);
+                    },
+                    label: "Get Started",
+                  ),
+                ],
+              ),
+            ),
+>>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
           ],
         ),
       ),
@@ -171,6 +256,7 @@ class SignUpPage extends StatelessWidget {
     TextInputType? keyboardType,
     bool obscureText = false,
     TextEditingController? controller,
+<<<<<<< HEAD
     String? Function(String?)? validator,
   }) {
     return Padding(
@@ -180,6 +266,16 @@ class SignUpPage extends StatelessWidget {
         obscureText: obscureText,
         controller: controller,
         validator: validator,
+=======
+
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
+      child: TextField(
+        keyboardType: keyboardType,
+        obscureText: obscureText,
+        controller: controller,
+>>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
         decoration: InputDecoration(
           fillColor: Color(0xffFCF2F1),
           filled: true,
@@ -196,9 +292,14 @@ class SignUpPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: prefixIcon,
           ),
+<<<<<<< HEAD
           errorStyle: TextStyle(color: Colors.white),
         ),
         style: TextStyle(),
+=======
+        ),
+        style: TextStyle(fontSize: 18),
+>>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
       ),
     );
   }
@@ -226,14 +327,21 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
+<<<<<<< HEAD
   TextStyle _textStyle({Color? color}) {
     return TextStyle(
       color: color ?? Color(0xffCC5946),
+=======
+  TextStyle _textStyle() {
+    return TextStyle(
+      color: Color(0xffCC5946),
+>>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
       fontSize: 18,
       fontWeight: FontWeight.normal,
     );
   }
 }
+<<<<<<< HEAD
 
 
 class _PasswordField extends StatefulWidget {
@@ -304,3 +412,5 @@ class _PasswordFieldState extends State<_PasswordField> {
     );
   }
 }
+=======
+>>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1

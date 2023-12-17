@@ -5,12 +5,16 @@ import 'package:get/get.dart';
 
 import '../constants/constants.dart';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
 class LoginController extends GetxController {
   final isLoading = false.obs;
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
 
+<<<<<<< HEAD
   String? validateUsername(String? value) {
     if (value == null || value.isEmpty || value.length < 6) {
       return 'Username must be at least 6 characters';
@@ -29,6 +33,8 @@ class LoginController extends GetxController {
   }
 
 
+=======
+>>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
   Future login(BuildContext context) async {
     try {
       isLoading.value = true;
@@ -58,4 +64,7 @@ class LoginController extends GetxController {
     }
   }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
