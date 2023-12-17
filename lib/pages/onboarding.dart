@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:pawfectly/pages/homePage.dart';
+import 'package:pawfectly/pages/signin.dart';
 
 class OnboardingPage extends StatefulWidget {
   @override
@@ -137,7 +137,7 @@ class _OnboardingPageState extends State<OnboardingPage>
             } else {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => SignInPage()),
               );
             }
           },

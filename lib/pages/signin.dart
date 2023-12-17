@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pawfectly/controllers/login_controller.dart';
-import 'package:pawfectly/pages/forumpage.dart';
+import 'package:pawfectly/pages/homePage.dart';
 import 'package:pawfectly/pages/signup.dart';
 
 class SignInPage extends StatelessWidget {
@@ -17,6 +17,35 @@ class SignInPage extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
+            SingleChildScrollView(
+              child: Positioned(
+                child: Form(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 200),
+                      _TextField(
+                        controller: _loginController.usernameController,
+                        context: context,
+                        hintText: "Username",
+                        prefixIcon: SvgPicture.asset("assets/username.svg"),
+                        validator: _loginController.validateUsername,
+                      ),
+                      _PasswordField(
+                        controller: _loginController.passwordController,
+                        context: context,
+                        hintText: "Password",
+                        prefixIcon: SvgPicture.asset("assets/padlock.svg",color: Color(0xffCC5946), height: 30,),
+                        validator: _loginController.validatePassword,
+                      ),
+                      SizedBox(height: 50),
+                      SvgPicture.asset("assets/hedgehogs.svg"),
+                      _buildAlmostThereText(context),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
             Positioned(
               top: 0,
               left: 0,
@@ -26,38 +55,49 @@ class SignInPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
               ),
             ),
+
             Positioned(
               top: 40,
               left: 0,
               right: 0,
               child: Column(
-                children: [
-                  Center(
-                    child: Image(
-                      image: AssetImage("assets/logo.png"),
+                  children: [
+                    Center(
+                      child: Image(
+                        image: AssetImage("assets/logo.png"),
+                      ),
                     ),
-                  ),
-                  _buildSignInSignUpRow(context),
-                  SizedBox(height: 60),
-                  _TextField(
-                    controller: _loginController.usernameController,
-                    context: context,
-                    hintText: "Username",
-                    prefixIcon: SvgPicture.asset("assets/username.svg"),
-                    validator: _loginController.validateUsername,
-                  ),
-                  _PasswordField(
-                    controller: _loginController.passwordController,
-                    context: context,
-                    hintText: "Password",
-                    prefixIcon: SvgPicture.asset("assets/padlock.svg",color: Color(0xffCC5946), height: 30,),
-                    validator: _loginController.validatePassword,
-                  ),
-                  SizedBox(height: 50),
-                  SvgPicture.asset("assets/hedgehogs.svg"),
-                  _buildAlmostThereText(context),
-                ],
-              ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 75.0, vertical: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "SignIn",
+                            style: _textStyle(),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpPage(),
+                                  fullscreenDialog: true,
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "SignUp",
+                              style: _textStyle(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    
+                  ],
+                ),
             ),
           ],
         ),
@@ -65,35 +105,7 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSignInSignUpRow(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 75.0, vertical: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "SignIn",
-            style: _textStyle(),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SignUpPage(),
-                  fullscreenDialog: true,
-                ),
-              );
-            },
-            child: Text(
-              "SignUp",
-              style: _textStyle(),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  
 
   Widget _buildAlmostThereText(BuildContext context) {
     return Padding(
@@ -120,23 +132,40 @@ class SignInPage extends StatelessWidget {
   Widget _buildGetStartedButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () async{
+        // _showLoginSuccessPopup(context);
         Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => ForumPage()),
-                        );
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
+              fullscreenDialog: true,
+            ),
+          );
 
-        // bool loginResult = await _loginController.login(context);
+        // String? username = _loginController.usernameController.text;
+        // String? password = _loginController.passwordController.text;
 
-        // if (loginResult) {
+
+
+        // // Validasi login
+        // String? loginValidation = _loginController.validateLogin(username, password);
+        // if (loginValidation != null) {
+        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(loginValidation)));
+        //   return;
+        // }
+
+        // // Lakukan login
+        // bool loginSuccess = await _loginController.login(context);
+
+        // if (loginSuccess) {
         //   Navigator.pushReplacement(
-        //                   context,
-        //                   MaterialPageRoute(builder: (context) => ForumPage()),
-        //                 );
-        // } else {
-          
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //     SnackBar(content: Text("Login failed. Please try again.")),
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => HomePage(),
+        //       fullscreenDialog: true,
+        //     ),
         //   );
+        // } else {
+        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login failed. Check your username and password.")));
         // }
       },
       child: Text(
@@ -156,6 +185,46 @@ class SignInPage extends StatelessWidget {
     );
   }
 
+  // void _showLoginSuccessPopup(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return Padding(
+  //         padding: const EdgeInsets.symmetric(vertical:100.0),
+  //         child: AlertDialog(
+  //           backgroundColor: Color(0xffFFF2DE),
+  //           content: Column(
+  //             children: [
+  //               Text("Congratulations"),
+  //               SvgPicture.asset("assets/succeed.svg"),
+  //               Column(
+  //                 children: [
+  //                   Text("You are successfully signed in to your account."),
+  //                   ElevatedButton(
+  //                     onPressed: () {
+  //                       Navigator.of(context).pop();
+  //                       // Navigate to the home page after closing the popup
+  //                       Navigator.pushReplacement(
+  //                         context,
+  //                         MaterialPageRoute(
+  //                           builder: (context) => HomePage(),
+  //                           fullscreenDialog: true,
+  //                         ),
+  //                       );
+  //                     },
+  //                     child: Text("OK"),
+  //                   ),
+  //                 ],
+  //               ),
+                
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
   TextStyle _textStyle() {
     return TextStyle(
       color: Color(0xffCC5946),
@@ -164,6 +233,7 @@ class SignInPage extends StatelessWidget {
     );
   }
 }
+
 
 class _PasswordField extends StatefulWidget {
   const _PasswordField({

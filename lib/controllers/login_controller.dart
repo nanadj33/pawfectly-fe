@@ -28,6 +28,18 @@ class LoginController extends GetxController {
     return null;
   }
 
+  String? validateLogin(String? username, String? password) {
+    if (username == null || username.isEmpty || username.length < 6) {
+      return 'Username must be at least 6 characters';
+    }
+
+    if (password == null || password.isEmpty) {
+      return 'Password is required';
+    }
+
+    return null;
+  }
+
 
   Future<bool> login(BuildContext context) async {
     try {

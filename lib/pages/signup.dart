@@ -208,7 +208,7 @@ class SignUpPage extends StatelessWidget {
     required String label,
   }) {
     return ElevatedButton(
-      onPressed: onPressed,
+    
       child: Text(
         label,
         style: TextStyle(
@@ -222,7 +222,7 @@ class SignUpPage extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-      ),
+      ), onPressed: onPressed,
     );
   }
 
