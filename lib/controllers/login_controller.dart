@@ -5,16 +5,12 @@ import 'package:get/get.dart';
 
 import '../constants/constants.dart';
 
-<<<<<<< HEAD
 
-=======
->>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
 class LoginController extends GetxController {
   final isLoading = false.obs;
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
 
-<<<<<<< HEAD
   String? validateUsername(String? value) {
     if (value == null || value.isEmpty || value.length < 6) {
       return 'Username must be at least 6 characters';
@@ -33,9 +29,7 @@ class LoginController extends GetxController {
   }
 
 
-=======
->>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
-  Future login(BuildContext context) async {
+  Future<bool> login(BuildContext context) async {
     try {
       isLoading.value = true;
       final deviceInfoPlugin = DeviceInfoPlugin();
@@ -55,16 +49,26 @@ class LoginController extends GetxController {
             "Content-Type": "application/json",
             "Accept": "application/json",
           }));
-      print(response.data.toString());
-    } on DioException catch (e) {
+
+      
+      bool loginSuccess = response.data['success'] ?? false;
+
+      if (loginSuccess) {
+        print("Login successful");
+      } else {
+        print("Login failed");
+      }
+
+      return loginSuccess;
+    } on DioError catch (e) {
       print("Error catch");
       print(e.response!.data['message']);
       final errorInfo = SnackBar(content: Text(e.response!.data['message']));
       ScaffoldMessenger.of(context).showSnackBar(errorInfo);
+      return false;
+    } finally {
+      isLoading.value = false;
     }
   }
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1

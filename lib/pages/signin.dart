@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pawfectly/controllers/login_controller.dart';
-<<<<<<< HEAD
 import 'package:pawfectly/pages/forumpage.dart';
-=======
->>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
 import 'package:pawfectly/pages/signup.dart';
 
 class SignInPage extends StatelessWidget {
@@ -42,16 +39,11 @@ class SignInPage extends StatelessWidget {
                   ),
                   _buildSignInSignUpRow(context),
                   SizedBox(height: 60),
-<<<<<<< HEAD
                   _TextField(
-=======
-                  _buildTextField(
->>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
                     controller: _loginController.usernameController,
                     context: context,
                     hintText: "Username",
                     prefixIcon: SvgPicture.asset("assets/username.svg"),
-<<<<<<< HEAD
                     validator: _loginController.validateUsername,
                   ),
                   _PasswordField(
@@ -60,15 +52,6 @@ class SignInPage extends StatelessWidget {
                     hintText: "Password",
                     prefixIcon: SvgPicture.asset("assets/padlock.svg",color: Color(0xffCC5946), height: 30,),
                     validator: _loginController.validatePassword,
-=======
-                  ),
-                  _buildTextField(
-                    controller: _loginController.passwordController,
-                    context: context,
-                    hintText: "Password",
-                    prefixIcon: SvgPicture.asset("assets/password.svg"),
-                    obscureText: true,
->>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
                   ),
                   SizedBox(height: 50),
                   SvgPicture.asset("assets/hedgehogs.svg"),
@@ -112,44 +95,6 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-<<<<<<< HEAD
-=======
-  Widget _buildTextField({
-    required BuildContext context,
-    required String hintText,
-    required Widget prefixIcon,
-    bool obscureText = false,
-    TextEditingController? controller,
-
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15),
-      child: TextField(
-        controller: controller,
-        obscureText: obscureText,
-        decoration: InputDecoration(
-          fillColor: Color(0xffFCF2F1),
-          filled: true,
-          hintText: hintText,
-          hintStyle: TextStyle(
-            color: Color.fromARGB(255, 222, 136, 128),
-          ),
-          contentPadding: EdgeInsets.all(12.0),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25.0),
-            borderSide: BorderSide.none,
-          ),
-          prefixIcon: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18),
-            child: prefixIcon,
-          ),
-        ),
-        style: TextStyle(fontSize: 18),
-      ),
-    );
-  }
-
->>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
   Widget _buildAlmostThereText(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(30.0),
@@ -174,7 +119,6 @@ class SignInPage extends StatelessWidget {
 
   Widget _buildGetStartedButton(BuildContext context) {
     return ElevatedButton(
-<<<<<<< HEAD
       onPressed: () async{
         Navigator.pushReplacement(
                           context,
@@ -194,10 +138,6 @@ class SignInPage extends StatelessWidget {
         //     SnackBar(content: Text("Login failed. Please try again.")),
         //   );
         // }
-=======
-      onPressed: () {
-        _loginController.login(context);
->>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
       },
       child: Text(
         "Get Started",
@@ -224,7 +164,6 @@ class SignInPage extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD
 
 class _PasswordField extends StatefulWidget {
   const _PasswordField({
@@ -342,5 +281,3 @@ class _TextField extends StatelessWidget {
     );
   }
 }
-=======
->>>>>>> db74c4200113538d3cc88c65c20c32f0a1bf85b1
