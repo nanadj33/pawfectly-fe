@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pawfectly/pages/onboarding.dart';
-import 'package:flutter/services.dart';
-import 'package:pawfectly/pages/signin.dart';
+import 'package:pawfectly/pages/forumpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +20,6 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: OnboardingPage());
+      home: ForumPage());
   }
 }

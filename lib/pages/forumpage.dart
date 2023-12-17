@@ -116,13 +116,14 @@ class _ForumPageState extends State<ForumPage> {
         body: ListView.builder(
           itemCount: filteredData.length,
           itemBuilder: (context, index) {
-            return GestureDetector(
+            return InkWell(
               onTap: () {
+                print('Card tapped');
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => CommentPage(
-                      forumData: filteredData[index],
+                      // forumData: filteredData[index],
                     ),
                   ),
                 );

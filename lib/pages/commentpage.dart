@@ -1,211 +1,144 @@
+import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pawfectly/constants/forumdata.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 
 class CommentPage extends StatefulWidget {
-  final DiscussionForum forumData;
-
-  CommentPage({Key? key, required this.forumData}) : super(key: key);
-
   @override
-  State<CommentPage> createState() => _CommentPageState();
+  _CommentPageState createState() => _CommentPageState();
 }
 
 class _CommentPageState extends State<CommentPage> {
-  late DiscussionForum forumData;
-  bool isFavorite = false;
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController commentController = TextEditingController();
+  List<Map<String, dynamic>> filedata = [
+    {
+      'name': 'Chuks Okwuenu',
+      'pic': 'https://picsum.photos/300/30',
+      'message': 'I love to code',
+      'date': DateTime(2021, 1, 1, 12, 0, 0),
+    },
+    // Add more comment data as needed
+  ];
 
   @override
   void initState() {
     super.initState();
-    forumData = widget.forumData;
+    initializeDateFormatting(); // Initialize intl library
+  }
+
+  Widget commentChild(List<Map<String, dynamic>> data) {
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12.0)
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset("assets/female.svg")
+                  ],
+                )
+              ],
+            ),
+
+          ),
+        ),
+        for (var i = 0; i < data.length; i++)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(2.0, 8.0, 2.0, 0.0),
+            child: ListTile(
+              leading: GestureDetector(
+                onTap: () async {
+                  // Display the image in a large form.
+                  print("Comment Clicked");
+                },
+                child: Container(
+                  height: 50.0,
+                  width: 50.0,
+                  decoration: new BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: new BorderRadius.all(Radius.circular(50))),
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: CommentBox.commentImageParser(
+                        imageURLorPath: data[i]['pic']),
+                  ),
+                ),
+              ),
+              title: Text(
+                data[i]['name'],
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(data[i]['message']),
+              trailing: Text(
+                formatDateTime(data[i]['date']),
+                style: TextStyle(fontSize: 10),
+              ),
+            ),
+          ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 252, 242, 241),
+      backgroundColor: Color(0xffFCF2F1),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 252, 242, 241),
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(Icons.arrow_back),
-        ),
-        title: Text("Forum"),
+        title: Text("Comment Page"),
+        backgroundColor: Color(0xffFCF2F1)
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 3.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
-                color: Colors.white,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(14.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              forumData.pic,
-                              width: 50,
-                            ),
-                            SizedBox(width: 8),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  forumData.name,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Text(
-                                  forumData.time,
-                                  style: TextStyle(fontSize: 11, height: 1),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        InkWell(
-                          onTap: () {
-                            // Handle bookmark tap if needed
-                          },
-                          child: Icon(
-                            Icons.bookmark,
-                            color: Color(0xffE0BAB5),
-                            size: 38,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 14),
-                    Text(
-                      forumData.title,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        height: 1.2,
-                      ),
-                    ),
-                    SizedBox(height: 6),
-                    Text(
-                      forumData.content,
-                      style: TextStyle(fontSize: 13, height: 1.25),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(height: 20),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Wrap(
-                          children: [
-                            ...forumData.tags.map((tag) => buildTagChip(tag)).toList(),
-                            
-                          ],
-                        ),
-                        SizedBox(height: 10,),
-                        
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Column(
-                              children: [
-                                Icon(
-                                  Icons.warning_rounded,
-                                  size: 34,
-                                  color: Color(0xffDBCA4E),
-                                ),
-                                Text(
-                                  "report",
-                                  style: TextStyle(
-                                    fontStyle: FontStyle.italic,
-                                    fontSize: 11,
-                                    height: 1,
-                                    color: Color(0xffDBCA4E),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(width: 8),
-                            Column(
-                              children: [
-                                InkWell(
-                                  onTap: (){
-                                    setState(() {
-                                    isFavorite ??= false;
-                                    if (isFavorite) {
-                                      forumData.likes -= 1;
-                                    } else {
-                                      forumData.likes += 1;
-                                    }
-                                    isFavorite = !isFavorite;
-                                  });
-                                  },
-                                  child: Icon(
-                                    Icons.favorite,
-                                    color: isFavorite
-                                    ? Color(0xffCC5946)
-                                    : Color.fromARGB(107, 204, 90, 70),
-                                    size: 34,
-                                  ),
-                                ),
-                                Text(
-                                  "${forumData.likes}",
-                                  style: TextStyle(
-                                    fontStyle: FontStyle.italic,
-                                    fontSize: 11,
-                                    height: 1,
-                                    color: Color(0xffCC5946),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
+      body: Container(
+        decoration: BoxDecoration(
+          border: Border(top: BorderSide.none)
+        ),
+        child: CommentBox(
+          userImage: CommentBox.commentImageParser(
+              imageURLorPath: "assets/girl.jpg"),
+          child: commentChild(filedata),
+          labelText: 'Comment as Regina...',
+          errorText: 'Comment cannot be blank',
+          withBorder: false,
+          sendButtonMethod: () {
+            if (formKey.currentState!.validate()) {
+              print(commentController.text);
+              setState(() {
+                var value = {
+                  'name': 'Regina',
+                  'pic': "assets/girl.jpg",
+                  'message': commentController.text,
+                  'date': DateTime.now(),
+                };
+
+                filedata.insert(0, value);
+              });
+              commentController.clear();
+              FocusScope.of(context).unfocus();
+            } else {
+              print("Not validated");
+            }
+          },
+          formKey: formKey,
+          commentController: commentController,
+          backgroundColor: Color(0xffFAE3E0),
+          textColor: Color.fromARGB(255, 176, 121, 114),
+          
+          sendWidget: Icon(Icons.send_rounded, size: 40, color: Color.fromARGB(255, 169, 126, 120)),
+        ),
       ),
     );
   }
 
-  Widget buildTagChip(String tag) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal:2.0, vertical: 2),
-      child: IntrinsicWidth(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Color(0xffFFFFE6BE),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
-            child: Center(
-              child: Text(
-                tag,
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+  String formatDateTime(DateTime dateTime) {
+    String formattedDate = DateFormat.yMMMMd('id_ID').format(dateTime);
+    String formattedTime = DateFormat.jm('id_ID').format(dateTime);
+    return '$formattedDate - $formattedTime';
   }
 }

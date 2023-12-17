@@ -71,7 +71,6 @@ class _HomePageState extends State<HomePage> {
                 title: Text('Saved Discussion',
                 style: TextStyle(color: Color(0xffE0BAB5),),),
                 onTap: () {
-                  // Handle going to "saved discussion"
                   Navigator.pop(context); // close the drawer
                 },
               ),
@@ -424,7 +423,7 @@ class _HomePageState extends State<HomePage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => CommentPage(
-                            forumData: topDiscussions[index],
+                            // forumData: topDiscussions[index],
                           ),
                         ),
                       );
