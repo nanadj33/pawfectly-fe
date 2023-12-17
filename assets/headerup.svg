@@ -1,0 +1,7 @@
+<svg width="360" height="164" viewBox="0 0 360 164" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 134C0 150.569 13.4315 164 30 164H330C346.569 164 360 150.569 360 134V0H0V134Z" fill="#FCF2F1"/>
+<mask id="path-2-inside-1_217_28" fill="white">
+<path d="M360 134C360 150.569 346.569 164 330 164H180V0H360V134Z"/>
+</mask>
+<path d="M360 134C360 155.539 342.539 173 321 173H180V155H330C346.569 155 360 145.598 360 134ZM180 0H360H180ZM360 0V164V0ZM180 164V0V164Z" fill="#F0DCDC" mask="url(#path-2-inside-1_217_28)"/>
+</svg>
