@@ -132,14 +132,14 @@ class SignInPage extends StatelessWidget {
   Widget _buildGetStartedButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () async{
-        // _showLoginSuccessPopup(context);
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomePage(),
-              fullscreenDialog: true,
-            ),
-          );
+        _showLoginSuccessPopup(context);
+        // Navigator.pushReplacement(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => HomePage(),
+        //       fullscreenDialog: true,
+        //     ),
+        //   );
 
         // String? username = _loginController.usernameController.text;
         // String? password = _loginController.passwordController.text;
@@ -185,45 +185,44 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-  // void _showLoginSuccessPopup(BuildContext context) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return Padding(
-  //         padding: const EdgeInsets.symmetric(vertical:100.0),
-  //         child: AlertDialog(
-  //           backgroundColor: Color(0xffFFF2DE),
-  //           content: Column(
-  //             children: [
-  //               Text("Congratulations"),
-  //               SvgPicture.asset("assets/succeed.svg"),
-  //               Column(
-  //                 children: [
-  //                   Text("You are successfully signed in to your account."),
-  //                   ElevatedButton(
-  //                     onPressed: () {
-  //                       Navigator.of(context).pop();
-  //                       // Navigate to the home page after closing the popup
-  //                       Navigator.pushReplacement(
-  //                         context,
-  //                         MaterialPageRoute(
-  //                           builder: (context) => HomePage(),
-  //                           fullscreenDialog: true,
-  //                         ),
-  //                       );
-  //                     },
-  //                     child: Text("OK"),
-  //                   ),
-  //                 ],
-  //               ),
-                
-  //             ],
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+  void _showLoginSuccessPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                  fullscreenDialog: true,
+                ),
+              );
+            },
+            child: Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: Container(
+                    width: double.infinity,
+                    color: Colors.transparent,
+                    child: SvgPicture.asset(
+                      "assets/succeed.svg",
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
 
   TextStyle _textStyle() {
     return TextStyle(
