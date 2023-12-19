@@ -1,5 +1,6 @@
-//import 'package:flutter/material.dart';
 class DiscussionForum {
+  bool isFavorite = false;
+  bool isSaved = false;
   String pic;
   String name;
   String title;
@@ -7,6 +8,7 @@ class DiscussionForum {
   String time;
   List tags;
   int likes;
+  List attachment;
 
   DiscussionForum({
     required this.pic,
@@ -16,6 +18,7 @@ class DiscussionForum {
     required this.time,
     required this.tags,
     required this.likes,
+    required this.attachment
   });
 
   static List<DiscussionForum> getcontent() {
@@ -23,18 +26,20 @@ class DiscussionForum {
 
     content.add(
       DiscussionForum(
-      pic: "assets/female.svg",
-      name: "Shannaz",
-      title: "Nggak sengaja makan makanan kucing!",
-      content: "Aduh... gimana ya tadi tuh aku lagi makan chitato, tapi majikan minta dikasih makan, alhasil ketuker deh. bahaya nggak sih?",
-      time: "20-02-12",
-      tags: ["kucing", "makanan"],
-      likes: 127
+        attachment: ["assets/geulis.jpeg", "assets/catfood.jpg"],
+        pic: "assets/female.svg",
+        name: "Shannaz",
+        title: "Nggak sengaja makan makanan kucing!",
+        content: "Aduh... gimana ya tadi tuh aku lagi makan chitato, tapi majikan minta dikasih makan, alhasil ketuker deh. bahaya nggak sih?",
+        time: "20-02-12",
+        tags: ["kucing", "makanan"],
+        likes: 127
       )
     );
 
     content.add(
       DiscussionForum(
+        attachment: ["assets/sickdog.jpg"],
         pic: "assets/male.svg",
         name: "Budi",
         title: "Perawatan Anjing yang Sedang Sakit: Apa yang Perlu Dilakukan?",
@@ -47,6 +52,7 @@ class DiscussionForum {
 
     content.add(
       DiscussionForum(
+        attachment: ["assets/birdy.jpg"],
         pic: "assets/female.svg",
         name: "Lily",
         title: "Memahami Bahasa Tubuh Burung Peliharaan: Tips Komunikasi",
@@ -59,6 +65,7 @@ class DiscussionForum {
 
     content.add(
       DiscussionForum(
+        attachment: ["assets/fishy.jpg"],
         pic: "assets/male.svg",
         name: "Agus",
         title: "Mengatasi Penyakit Umum pada Ikan Hias",
@@ -71,6 +78,7 @@ class DiscussionForum {
 
     content.add(
       DiscussionForum(
+        attachment: ["assets/turtle.jpg"],
         pic: "assets/female.svg",
         name: "Ratna",
         title: "Pentingnya Pemberian Makan yang Sehat untuk Kura-kura",
@@ -83,6 +91,7 @@ class DiscussionForum {
 
     content.add(
       DiscussionForum(
+        attachment: ["assets/sickdog.jpg"],
         pic: "assets/male.svg",
         name: "Eko",
         title: "Apa yang Harus Dilakukan Ketika Anjing Tidak Mau Makan?",
@@ -95,6 +104,7 @@ class DiscussionForum {
 
     content.add(
       DiscussionForum(
+        attachment: [],
         pic: "assets/female.svg",
         name: "Susi",
         title: "Tips Merawat Bulu dan Kuku Burung Lovebird",
@@ -107,6 +117,7 @@ class DiscussionForum {
 
     content.add(
       DiscussionForum(
+        attachment: ["assets/fishpool.jpg", "assets/fishy.jpg"],
         pic: "assets/male.svg",
         name: "Hendra",
         title: "Mengatasi Parasit pada Ikan Koi",
@@ -119,6 +130,7 @@ class DiscussionForum {
 
     content.add(
       DiscussionForum(
+        attachment: ["assets/geulis.jpeg"],
         pic: "assets/female.svg",
         name: "Ratih",
         title: "Cara Mengetahui Kucing Sedang Bahagia atau Stres",
@@ -131,6 +143,7 @@ class DiscussionForum {
 
     content.add(
       DiscussionForum(
+        attachment: ["assets/turtle.jpg"],
         pic: "assets/male.svg",
         name: "Dedi",
         title: "Merawat Kura-kura Agar Tidak Cepat Tertular Penyakit",
@@ -143,6 +156,7 @@ class DiscussionForum {
 
     content.add(
       DiscussionForum(
+        attachment: [],
         pic: "assets/female.svg",
         name: "Eva",
         title: "Menyikapi Anjing yang Suka Menggonggong Terus-Menerus",
@@ -155,6 +169,7 @@ class DiscussionForum {
 
     content.add(
       DiscussionForum(
+        attachment: ["assets/armadillo.jpg"],
         pic: "assets/male.svg",
         name: "Abi",
         title: "Armadillo saya tersedak, harus apa?",
