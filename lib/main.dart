@@ -21,6 +21,6 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: PetListPage());
+      home: OnboardingPage());
   }
 }

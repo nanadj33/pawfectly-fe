@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pawfectly/pages/addDiscussion.dart';
 import 'package:pawfectly/widgets/attachment_chip.dart';
 
 import '../constants/forumdata.dart';
@@ -270,7 +271,12 @@ class _ForumPageState extends State<ForumPage> {
             right: 24,
             child: IconButton(
               onPressed: () {
-                // Handle button click
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddDiscussionPage(),
+                  ),
+                );
                 print('Button Clicked');
               },
               icon: SvgPicture.asset(
