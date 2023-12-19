@@ -4,7 +4,7 @@ import 'report_form.dart';
 
 class Pet {
   String name;
-  String content; // Ganti breed menjadi content
+  String content;
   String report;
   DateTime dateTime;
   List<String> attachments;
@@ -77,7 +77,7 @@ class _PetListPageState extends State<PetListPage> {
                     ),
                   );
                 } else {
-                  return Container(); // Return an empty container for non-matching items
+                  return Container(); // ini rencananya mau ditambahin kucing
                 }
               },
             ),
