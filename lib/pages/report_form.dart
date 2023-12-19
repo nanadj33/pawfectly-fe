@@ -16,28 +16,19 @@ class _PetFormPageState extends State<PetFormPage> {
   String selectedreportType = 'Daily Report'; // Default value
   final List<String> reportType = ['Daily Report', 'Consultation', 'Vaccine'];
   String selectedPetName = 'Molly'; // Default value
-  final List<String> petNames = ['Molly', 'Corgi', 'Mushroom'];
+  final List<String> petNames = ['Molly', 'Corgi', 'Mushroom', 'Snowy'];
 
   String content = '';
   List<String> attachments = [];
   DateTime? selectedDateTime;
 
-  final ImagePicker _picker = ImagePicker();
-
-  Future<void> _getImageFromGallery() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      setState(() {
-        attachments.add(image.path);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffFCF2F1),
       appBar: AppBar(
-        title: Text('Report Pet'),
+        backgroundColor: Color(0xffFCF2F1),
+        title: Text('Report Pet Form'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -126,30 +117,12 @@ class _PetFormPageState extends State<PetFormPage> {
                     content: content,
                     report: selectedreportType,
                     dateTime: selectedDateTime ?? DateTime.now(),
-                    attachments: attachments,
                   ),
                 );
               },
               child: Text('Submit Report'),
             ),
-            SizedBox(height: 16),
-            InkWell(
-              onTap: () async {
-                await _getImageFromGallery();
-              },
-              child: Container(
-                height: 50,
-                margin: EdgeInsets.symmetric(vertical: 10),
-                color: Colors.grey[300],
-                child: Row(
-                  children: [
-                    Icon(Icons.add),
-                    SizedBox(width: 8),
-                    Text('Add Photo'),
-                  ],
-                ),
-              ),
-            ),
+
             SizedBox(height: 8),
             if (attachments.isNotEmpty)
               Container(
