@@ -1,9 +1,9 @@
 ## Welcome to Pawfectly
 
 authors:
-Revo Chrysler Pasaribu
-Nada Asyifa D (nanadj33)
-Gabrielle Rosdiva R H (hazellenuts, Your Name)
+    Revo Chrysler Pasaribu
+    Nada Asyifa D (nanadj33)
+    Gabrielle Rosdiva R H (hazellenuts, Your Name)
 
 Pawfectly is more than an app; it's a commitment to the health and happiness of your beloved companions. Here you can engage in lively discussions, consult with specialists online, find the nearest clinics, and effortlessly track your pet's growth with our intuitive Pet Report feature.
 
