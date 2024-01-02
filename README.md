@@ -1,7 +1,7 @@
 ## Welcome to Pawfectly
 
 authors:
-- Revo Chrysler Pasaribu
+- Revo Chrysler Pasaribu (smthl1keyou)
 - Nada Asyifa D (nanadj33)
 - Gabrielle Rosdiva R H (hazellenuts, Your Name)
 
