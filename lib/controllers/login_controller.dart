@@ -2,9 +2,10 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pawfectly/controllers/encrypt_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/constants.dart';
-
 
 class LoginController extends GetxController {
   final isLoading = false.obs;
@@ -40,14 +41,13 @@ class LoginController extends GetxController {
     return null;
   }
 
-
   Future<bool> login(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
       isLoading.value = true;
       final deviceInfoPlugin = DeviceInfoPlugin();
       final deviceInfo = await deviceInfoPlugin.androidInfo;
       final deviceId = deviceInfo.id;
-      print(deviceId);
       var data = {
         'username': usernameController.text,
         'password': passwordController.text,
@@ -62,10 +62,19 @@ class LoginController extends GetxController {
             "Accept": "application/json",
           }));
 
-      
       bool loginSuccess = response.data['success'] ?? false;
 
       if (loginSuccess) {
+        prefs.setString('id', response.data['data']['id'].toString());
+        prefs.setString('name', response.data['data']['name'].toString());
+        prefs.setString(
+            'username', response.data['data']['username'].toString());
+        prefs.setString('phone', response.data['data']['phone'].toString());
+        prefs.setString('email', response.data['data']['email'].toString());
+        prefs.setString(
+            'image', response.data['data']['image_path'].toString());
+        prefs.setString(
+            'token', encryptMyData(response.data['token'].toString()));
         print("Login successful");
       } else {
         print("Login failed");
@@ -83,4 +92,3 @@ class LoginController extends GetxController {
     }
   }
 }
-
