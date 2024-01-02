@@ -12,7 +12,7 @@ class _ClinicFinderState extends State<ClinicFinder> {
   List<ClinicCardInfo> allClinics = [];
   List<ClinicCardInfo> displayedClinics = [];
   ScrollController _scrollController = ScrollController();
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -42,30 +42,30 @@ class _ClinicFinderState extends State<ClinicFinder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFCF2F1),
+      backgroundColor: const Color(0xffFCF2F1),
       appBar: AppBar(
-        backgroundColor: Color(0xffFCF2F1),
-        leading: Icon(Icons.arrow_back),
-        title: Text("Clinic Finder"),
+        backgroundColor: const Color(0xffFCF2F1),
+        leading: const Icon(Icons.arrow_back),
+        title: const Text("Clinic Finder"),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(60),
+          preferredSize: const Size.fromHeight(60),
           child: Container(
             child: Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 8, bottom: 16),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 8, bottom: 16),
               child: TextField(
                 controller: _searchController,
                 decoration: InputDecoration(
                   filled: true,
                   hintText: "Search for District or City",
-                  hintStyle: TextStyle(color: Color(0xffBF9089)),
+                  hintStyle: const TextStyle(color: Color(0xffBF9089)),
                   fillColor: Colors.white,
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 12.0, horizontal: 18),
+                      const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25.0),
                     borderSide: BorderSide.none,
                   ),
-                  suffixIcon: Icon(Icons.search, color: Color(0xffBF9089)),
+                  suffixIcon: const Icon(Icons.search, color: Color(0xffBF9089)),
                 ),
               ),
             ),
@@ -79,8 +79,8 @@ class _ClinicFinderState extends State<ClinicFinder> {
           child: Expanded(
             child: GridView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
                 crossAxisSpacing: 6.0,
                 mainAxisSpacing: 6.0,
@@ -104,12 +104,12 @@ class _ClinicFinderState extends State<ClinicFinder> {
 class ClinicCard extends StatelessWidget {
   final ClinicCardInfo clinicInfo;
 
-  ClinicCard(this.clinicInfo);
+  const ClinicCard(this.clinicInfo, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color(0xffFCF2F1),
+      color: const Color(0xffFCF2F1),
       child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -117,7 +117,7 @@ class ClinicCard extends StatelessWidget {
               children: [
                 Text(
                   clinicInfo.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     height: 1
@@ -125,20 +125,20 @@ class ClinicCard extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   clinicInfo.services,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 14
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   clinicInfo.alamat,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 13,
                     fontStyle: FontStyle.italic,
@@ -148,21 +148,21 @@ class ClinicCard extends StatelessWidget {
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: 6),
+                const SizedBox(height: 6),
                 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "${clinicInfo.rating}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14
                       )
                     ),
                     Text(
                       "${clinicInfo.distance} mi",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14
                       ),
