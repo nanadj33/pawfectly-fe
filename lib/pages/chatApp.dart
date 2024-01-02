@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
+
   @override
   State createState() => ChatScreenState();
 }
@@ -19,23 +21,23 @@ class ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFCF2F1),
+      backgroundColor: const Color(0xffFCF2F1),
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(onPressed: () {
           Navigator.pop(context);
         },
-        icon: Icon(Icons.arrow_back),
+        icon: const Icon(Icons.arrow_back),
         ),
-        title: Text("Online Consultation"),
-        shape: RoundedRectangleBorder(
+        title: const Text("Online Consultation"),
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(25),
             bottomRight: Radius.circular(25),
           ),
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize: const Size.fromHeight(80.0),
           child: Padding(
             padding: const EdgeInsets.only(right: 20.0, bottom: 20.0, left: 20.0),
             child: Row(
@@ -56,11 +58,11 @@ class ChatScreenState extends State<ChatScreen> {
                         children: [
                           Text(
                             doctorName,
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                           ),
                           Text(
                             doctorProfession,
-                            style: TextStyle(fontSize: 13),
+                            style: const TextStyle(fontSize: 13),
                           )
                         ],
                       ),
@@ -72,7 +74,7 @@ class ChatScreenState extends State<ChatScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.call_rounded,
                         color: Color(0xffFA8439),
                         size: 40,
@@ -89,17 +91,17 @@ class ChatScreenState extends State<ChatScreen> {
                         }
                       },
                     ),
-                    SizedBox(width: 6),
+                    const SizedBox(width: 6),
                     IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.videocam_rounded,
                       color: Color(0xffCC5946),
                       size: 50,
                     ),
                     onPressed: ()async{
-                        final Uri _url = Uri.parse('https://meet.jit.si/deviceid');
-                        if (!await launchUrl(_url)) {
-                          throw Exception('Could not launch $_url');
+                        final Uri url0 = Uri.parse('https://meet.jit.si/deviceid');
+                        if (!await launchUrl(url0)) {
+                          throw Exception('Could not launch $url0');
                         }
                     }
                   ),
@@ -164,7 +166,7 @@ class ChatScreenState extends State<ChatScreen> {
   }
 
   void _simulateDoctorReply() {
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       ChatMessage reply = ChatMessage(
         text: 'Halo, ada yang bisa saya bantu?',
         sender: 'Doc',
@@ -180,7 +182,7 @@ class ChatScreenState extends State<ChatScreen> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
-        color: Color(0xffF6CDC7),
+        color: const Color(0xffF6CDC7),
       ),
       child: Padding(
         padding: const EdgeInsets.only(left: 16, top: 6, bottom: 6, right: 0),
@@ -197,7 +199,7 @@ class ChatScreenState extends State<ChatScreen> {
                   keyboardType: TextInputType.multiline,
                   decoration: InputDecoration.collapsed(
                     hintText: 'Enter your message',
-                    hintStyle: TextStyle(color: const Color.fromARGB(255, 194, 119, 107)),
+                    hintStyle: const TextStyle(color: Color.fromARGB(255, 194, 119, 107)),
                     filled: true,
                     fillColor: Colors.transparent,
                     border: OutlineInputBorder(
@@ -209,11 +211,11 @@ class ChatScreenState extends State<ChatScreen> {
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 4.0),
+              margin: const EdgeInsets.symmetric(horizontal: 4.0),
               child: Row(
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.camera_alt,
                       size: 30,
                       color: Color.fromARGB(255, 194, 119, 107),
@@ -221,7 +223,7 @@ class ChatScreenState extends State<ChatScreen> {
                     onPressed: _pickImage,
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.send,
                       size: 34,
                       color: Color.fromARGB(255, 194, 119, 107),
@@ -255,7 +257,7 @@ class ChatScreenState extends State<ChatScreen> {
 class RoundedImage extends StatelessWidget {
   final File imageFile;
 
-  RoundedImage({required this.imageFile});
+  const RoundedImage({super.key, required this.imageFile});
 
   @override
   Widget build(BuildContext context) {
@@ -287,7 +289,7 @@ class RoundedImage extends StatelessWidget {
 }
 
 class ChatMessage extends StatelessWidget {
-  ChatMessage({
+  const ChatMessage({super.key, 
     required this.text,
     required this.sender,
     required this.doctorImage,
@@ -335,14 +337,14 @@ class ChatMessage extends StatelessWidget {
                       margin: !isUserSender ? const EdgeInsets.only(right: 50) : const EdgeInsets.only(left: 50),
                       padding: const EdgeInsets.all(12.0),
                       decoration: BoxDecoration(
-                        color: isUserSender ? Color(0xffFFC989) : Color(0xffF1ACA1),
+                        color: isUserSender ? const Color(0xffFFC989) : const Color(0xffF1ACA1),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Text(
                         text,
                         style: TextStyle(
                           fontSize: 15,
-                          color: isUserSender ? Color.fromARGB(255, 78, 53, 24) : Colors.black,
+                          color: isUserSender ? const Color.fromARGB(255, 78, 53, 24) : Colors.black,
                         ),
                       ),
                     ),
