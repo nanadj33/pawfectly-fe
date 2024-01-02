@@ -6,46 +6,47 @@ import 'package:pawfectly/pages/homePage.dart';
 import 'package:pawfectly/pages/signup.dart';
 
 class SignInPage extends StatelessWidget {
-  SignInPage({Key? key});
+  SignInPage({super.key});
   final LoginController _loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color(0xffCC5946),
+        color: const Color(0xffCC5946),
         child: Stack(
           fit: StackFit.expand,
           children: [
             SingleChildScrollView(
-              child: Positioned(
-                child: Form(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 200),
-                      _TextField(
-                        controller: _loginController.usernameController,
-                        context: context,
-                        hintText: "Username",
-                        prefixIcon: SvgPicture.asset("assets/username.svg"),
-                        validator: _loginController.validateUsername,
+              child: Form(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 200),
+                    _TextField(
+                      controller: _loginController.usernameController,
+                      context: context,
+                      hintText: "Username",
+                      prefixIcon: SvgPicture.asset("assets/username.svg"),
+                      validator: _loginController.validateUsername,
+                    ),
+                    _PasswordField(
+                      controller: _loginController.passwordController,
+                      context: context,
+                      hintText: "Password",
+                      prefixIcon: SvgPicture.asset(
+                        "assets/padlock.svg",
+                        color: const Color(0xffCC5946),
+                        height: 30,
                       ),
-                      _PasswordField(
-                        controller: _loginController.passwordController,
-                        context: context,
-                        hintText: "Password",
-                        prefixIcon: SvgPicture.asset("assets/padlock.svg",color: Color(0xffCC5946), height: 30,),
-                        validator: _loginController.validatePassword,
-                      ),
-                      SizedBox(height: 50),
-                      SvgPicture.asset("assets/hedgehogs.svg"),
-                      _buildAlmostThereText(context),
-                    ],
-                  ),
+                      validator: _loginController.validatePassword,
+                    ),
+                    const SizedBox(height: 50),
+                    SvgPicture.asset("assets/hedgehogs.svg"),
+                    _buildAlmostThereText(context),
+                  ],
                 ),
               ),
             ),
-
             Positioned(
               top: 0,
               left: 0,
@@ -55,57 +56,53 @@ class SignInPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
               ),
             ),
-
             Positioned(
               top: 40,
               left: 0,
               right: 0,
               child: Column(
-                  children: [
-                    Center(
-                      child: Image(
-                        image: AssetImage("assets/logo.png"),
-                      ),
+                children: [
+                  const Center(
+                    child: Image(
+                      image: AssetImage("assets/logo.png"),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 75.0, vertical: 25),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "SignIn",
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 75.0, vertical: 25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "SignIn",
+                          style: _textStyle(),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignUpPage(),
+                                fullscreenDialog: true,
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "SignUp",
                             style: _textStyle(),
                           ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SignUpPage(),
-                                  fullscreenDialog: true,
-                                ),
-                              );
-                            },
-                            child: Text(
-                              "SignUp",
-                              style: _textStyle(),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    
-                  ],
-                ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
   }
-
-  
 
   Widget _buildAlmostThereText(BuildContext context) {
     return Padding(
@@ -114,7 +111,7 @@ class SignInPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(
+          const Text(
             "we're\nalmost\nthere",
             style: TextStyle(
               color: Color(0xffFCF2F1),
@@ -131,8 +128,8 @@ class SignInPage extends StatelessWidget {
 
   Widget _buildGetStartedButton(BuildContext context) {
     return ElevatedButton(
-      onPressed: () async{
-        _showLoginSuccessPopup(context);
+      onPressed: () async {
+        // _showLoginSuccessPopup(context);
         // Navigator.pushReplacement(
         //     context,
         //     MaterialPageRoute(
@@ -141,45 +138,47 @@ class SignInPage extends StatelessWidget {
         //     ),
         //   );
 
-        // String? username = _loginController.usernameController.text;
-        // String? password = _loginController.passwordController.text;
-
-
+        String? username = _loginController.usernameController.text;
+        String? password = _loginController.passwordController.text;
 
         // // Validasi login
-        // String? loginValidation = _loginController.validateLogin(username, password);
-        // if (loginValidation != null) {
-        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(loginValidation)));
-        //   return;
-        // }
+        String? loginValidation =
+            _loginController.validateLogin(username, password);
+        if (loginValidation != null) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(loginValidation)));
+          return;
+        }
 
         // // Lakukan login
-        // bool loginSuccess = await _loginController.login(context);
+        bool loginSuccess = await _loginController.login(context);
 
-        // if (loginSuccess) {
-        //   Navigator.pushReplacement(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => HomePage(),
-        //       fullscreenDialog: true,
-        //     ),
-        //   );
-        // } else {
-        //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login failed. Check your username and password.")));
-        // }
+        if (loginSuccess) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomePage(),
+              fullscreenDialog: true,
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content:
+                  Text("Login failed. Check your username and password.")));
+        }
       },
-      child: Text(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color.fromARGB(255, 252, 196, 118),
+        minimumSize: const Size(111, 46),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      child: const Text(
         "Get Started",
         style: TextStyle(
           color: Color(0xFF704520),
           fontSize: 16,
-        ),
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: Color.fromARGB(255, 252, 196, 118),
-        minimumSize: Size(111, 46),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
         ),
       ),
     );
@@ -196,7 +195,7 @@ class SignInPage extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomePage(),
+                  builder: (context) => const HomePage(),
                   fullscreenDialog: true,
                 ),
               );
@@ -223,16 +222,14 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-
   TextStyle _textStyle() {
-    return TextStyle(
+    return const TextStyle(
       color: Color(0xffCC5946),
       fontSize: 18,
       fontWeight: FontWeight.normal,
     );
   }
 }
-
 
 class _PasswordField extends StatefulWidget {
   const _PasswordField({
@@ -265,13 +262,13 @@ class _PasswordFieldState extends State<_PasswordField> {
         controller: widget.controller,
         obscureText: !isPasswordVisible,
         decoration: InputDecoration(
-          fillColor: Color(0xffFCF2F1),
+          fillColor: const Color(0xffFCF2F1),
           filled: true,
           hintText: widget.hintText,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: Color.fromARGB(255, 222, 136, 128),
           ),
-          contentPadding: EdgeInsets.all(12.0),
+          contentPadding: const EdgeInsets.all(12.0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25.0),
             borderSide: BorderSide.none,
@@ -287,15 +284,13 @@ class _PasswordFieldState extends State<_PasswordField> {
               });
             },
             child: Icon(
-              isPasswordVisible
-                  ? Icons.visibility
-                  : Icons.visibility_off,
-              color: Color(0xffCC5946),
+              isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+              color: const Color(0xffCC5946),
             ),
           ),
-          errorStyle: TextStyle(color: Colors.white),
+          errorStyle: const TextStyle(color: Colors.white),
         ),
-        style: TextStyle(fontSize: 18),
+        style: const TextStyle(fontSize: 18),
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: widget.validator,
       ),
@@ -326,13 +321,13 @@ class _TextField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
-          fillColor: Color(0xffFCF2F1),
+          fillColor: const Color(0xffFCF2F1),
           filled: true,
           hintText: hintText,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: Color.fromARGB(255, 222, 136, 128),
           ),
-          contentPadding: EdgeInsets.all(12.0),
+          contentPadding: const EdgeInsets.all(12.0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25.0),
             borderSide: BorderSide.none,
@@ -341,9 +336,9 @@ class _TextField extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 18),
             child: prefixIcon,
           ),
-          errorStyle: TextStyle(color: Colors.white),
+          errorStyle: const TextStyle(color: Colors.white),
         ),
-        style: TextStyle(fontSize: 18),
+        style: const TextStyle(fontSize: 18),
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: validator,
       ),
